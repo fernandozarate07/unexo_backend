@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------------------- > Enums
+
+enum Role {
+  user
+  admin
+}
+
+enum ReportReason {
+  private_link
+  fraud
+  non_owner
+  incorrect_classification
+
+}
+
+// ------------------------------------------------------------------------- > User
+
+model user {
+  id                     Int                 @id @default(autoincrement())
+  phone                  String              @unique
+  name                   String              @db.VarChar(100)
+  email                  String              @unique @db.VarChar(255)
+  password               String              @db.VarChar(255)
+  profilePhoto           String?             @db.Text
+  registerDate           DateTime            @default(now()) @db.Timestamp(0)
+  resetToken             String?             @db.VarChar(255)
+  resetTokenExpiration   DateTime?
+  role                   Role                @default(user)
+  points                 Int                 @default(0)
+
+  contributions          contribution[]
+  likesOnContributions   likeContribution[]
+  reports                report[]
+  notifications          notification[]
+}
+
+// ------------------------------------------------------------------------- > Contribution
+
+model contributionType {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique @db.VarChar(50)
+  contributions contribution[]
+}
+
+model contribution {
+  id               Int              @id @default(autoincrement())
+  userId           Int
+  title            String           @db.VarChar(255)
+  description      String           @db.Text
+  url              String           @db.VarChar(500)
+  typeId           Int
+  likesCount       Int              @default(0)
+  facultyId        Int
+  degreeId         Int
+  yearId           Int
+  subjectId        Int
+  isActive         Boolean          @default(true)
+  createdAt        DateTime         @default(now()) @db.Timestamp(0)
+
+  user             user             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  faculty          faculty          @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  degree           degree           @relation(fields: [degreeId], references: [id], onDelete: Cascade)
+  academicYear     academicYear     @relation(fields: [yearId], references: [id], onDelete: Cascade)
+  subject          subject          @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  type             contributionType @relation(fields: [typeId], references: [id], onDelete: Cascade)
+
+  likes            likeContribution[]
+  notifications    notification[]
+  reports          report[]
+
+  @@index([userId])
+  @@index([facultyId])
+  @@index([degreeId])
+  @@index([yearId])
+  @@index([subjectId])
+  @@index([typeId])
+  @@index([isActive])
+  @@index([createdAt])
+}
+
+// ------------------------------------------------------------------------- > Like
+
+model likeContribution {
+  id          Int        @id @default(autoincrement())
+  userId      Int
+  contributionId Int
+  value       Int        @default(1)
+  addedAt     DateTime   @default(now()) @db.Timestamp(0)
+
+  user        user        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contribution contribution @relation(fields: [contributionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contributionId])
+  @@index([contributionId])
+}
+
+// ------------------------------------------------------------------------- > Report
+
+model report {
+  id             Int           @id @default(autoincrement())
+  userId         Int
+  contributionId Int
+  reason         ReportReason
+  description    String        @db.Text
+  isResolved     Boolean       @default(false)
+  createdAt      DateTime      @default(now()) @db.Timestamp(0)
+
+  user           user          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contribution   contribution @relation(fields: [contributionId], references: [id], onDelete: Cascade)
+
+  @@index([isResolved])
+  @@index([contributionId])
+  @@index([createdAt])
+}
+
+// ------------------------------------------------------------------------- > Notification
+
+model notification {
+  id             Int        @id @default(autoincrement())
+  userId         Int
+  contributionId Int?
+  message        String     @db.Text
+  isRead         Boolean    @default(false)
+  createdAt      DateTime   @default(now()) @db.Timestamp(0)
+
+  user           user        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contribution   contribution? @relation(fields: [contributionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// ------------------------------------------------------------------------- > Static Data
+
+model faculty {
+  id           Int             @id @default(autoincrement())
+  name         String          @unique @db.VarChar(255)
+
+  degrees      degree[]
+  contributions contribution[]
+}
+
+model degree {
+  id         Int           @id @default(autoincrement())
+  name       String        @db.VarChar(255)
+  facultyId  Int
+
+  faculty    faculty       @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  contributions contribution[]
+  academicYears academicYear[]
+
+  @@index([facultyId])
+}
+
+model academicYear {
+  id         Int           @id @default(autoincrement())
+  name       String        @db.VarChar(50)
+  degreeId   Int
+
+  degree     degree        @relation(fields: [degreeId], references: [id], onDelete: Cascade)
+  contributions contribution[]
+  subjects   subject[]
+
+  @@index([degreeId])
+}
+
+model subject {
+  id              Int             @id @default(autoincrement())
+  name            String          @db.VarChar(255)
+  yearId          Int
+
+  academicYear    academicYear   @relation(fields: [yearId], references: [id], onDelete: Cascade)
+  contributions   contribution[]
+
+  @@index([yearId])
+}
