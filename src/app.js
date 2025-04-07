@@ -8,7 +8,7 @@ require("./config/passport");
 const app = express();
 
 // Importación de rutas
-// const authRoutes = require("./routes/authRoutes.js");
+const authRoutes = require("./routes/authRoutes.js");
 // const userRoutes = require("./routes/userRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 // const likeRoutes = require("./routes/likeRoutes.js");
@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -48,7 +48,7 @@ app.use(passport.session());
 
 // Rutas API
 // app.use("/api/app", appRoutes);
-// app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 // app.use("/api/user", userRoutes);
 // app.use("/api/filter", filterRoutes);
