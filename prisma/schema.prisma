@@ -11,22 +11,14 @@ datasource db {
 
 enum Role {
   user
+  moderator
   admin
-}
-
-enum ReportReason {
-  private_link
-  fraud
-  non_owner
-  incorrect_classification
-
 }
 
 // ------------------------------------------------------------------------- > User
 
 model user {
   id                     Int                 @id @default(autoincrement())
-  phone                  String              @unique
   name                   String              @db.VarChar(100)
   email                  String              @unique @db.VarChar(255)
   password               String              @db.VarChar(255)
@@ -104,23 +96,30 @@ model likeContribution {
 }
 
 // ------------------------------------------------------------------------- > Report
+model reportReason {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  reports report[]
+}
 
 model report {
   id             Int           @id @default(autoincrement())
   userId         Int
   contributionId Int
-  reason         ReportReason
+  reasonId       Int
+  reason         reportReason  @relation(fields: [reasonId], references: [id])
   description    String        @db.Text
   isResolved     Boolean       @default(false)
   createdAt      DateTime      @default(now()) @db.Timestamp(0)
 
   user           user          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  contribution   contribution @relation(fields: [contributionId], references: [id], onDelete: Cascade)
+  contribution   contribution  @relation(fields: [contributionId], references: [id], onDelete: Cascade)
 
   @@index([isResolved])
   @@index([contributionId])
   @@index([createdAt])
 }
+
 
 // ------------------------------------------------------------------------- > Notification
 

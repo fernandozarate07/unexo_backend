@@ -38,6 +38,7 @@ const resetStaticData = async (req, res) => {
     await prisma.$executeRawUnsafe(`DELETE FROM degree`);
     await prisma.$executeRawUnsafe(`DELETE FROM faculty`);
     await prisma.$executeRawUnsafe(`DELETE FROM contributionType`);
+    await prisma.$executeRawUnsafe(`DELETE FROM reportReason`);
 
     // Reiniciar AUTO_INCREMENT
     await prisma.$executeRawUnsafe(`ALTER TABLE subject AUTO_INCREMENT = 1`);

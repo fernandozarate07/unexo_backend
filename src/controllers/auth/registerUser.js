@@ -2,19 +2,19 @@ const prisma = require("../../config/prisma");
 const bcrypt = require("bcryptjs");
 
 const registerUser = async (req, res) => {
-  const { name, email, phone, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
     // Verificamos si el usuario ya existe
     const existingUser = await prisma.user.findFirst({
       where: {
-        OR: [{ email: email }, { phone: phone }],
+        OR: [{ email: email }],
       },
     });
 
     if (existingUser) {
       return res.status(400).json({
-        message: "ERROR: El usuario con este correo o teléfono ya existe",
+        message: "ERROR: Este email ya fue ocupado",
       });
     }
 
@@ -26,7 +26,6 @@ const registerUser = async (req, res) => {
       data: {
         name,
         email,
-        phone,
         password: hashedPassword,
       },
     });
@@ -37,7 +36,6 @@ const registerUser = async (req, res) => {
         id: newUser.id,
         nombre: newUser.name,
         email: newUser.email,
-        telefono: newUser.phone,
       },
     });
   } catch (err) {
