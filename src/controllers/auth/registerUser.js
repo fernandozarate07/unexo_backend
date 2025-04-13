@@ -34,8 +34,6 @@ const registerUser = async (req, res) => {
       message: "Usuario creado con éxito",
       user: {
         id: newUser.id,
-        nombre: newUser.name,
-        email: newUser.email,
       },
     });
   } catch (err) {
