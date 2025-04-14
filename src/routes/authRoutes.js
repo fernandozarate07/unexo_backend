@@ -5,19 +5,20 @@ const router = express.Router();
 // const { forgotPassword, resetForgotPassword } = require("../controller/auth/forgotPassword");
 const { logoutUser, loginUser } = require("../controllers/auth/loginLogoutUser");
 const registerUser = require("../controllers/auth/registerUser");
+const sessionStatus = require("../controllers/auth/sessionStatus");
 
 // Validator require
 const authValidator = require("../validators/authValidator");
 
-// Service require
+// Middleware require
 const validateDataRequest = require("../middlewares/validateDataRequest");
-const { checkSessionFlow, checkSessionStatus } = require("../middlewares/checkSession");
+const checkSessionFlow = require("../middlewares/checkSessionFlow");
 
 // Rutas de autenticación
 router.post("/register", authValidator, validateDataRequest, registerUser);
 router.post("/login", loginUser);
 router.post("/logout", checkSessionFlow, logoutUser);
-router.get("/checkSessionStatus", checkSessionStatus);
+router.get("/sessionStatus", sessionStatus);
 // router.post("/forgot-password", forgotPassword);
 // router.post("/reset-forgot-password", resetForgotPassword);
 

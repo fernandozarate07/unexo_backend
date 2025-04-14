@@ -66,7 +66,6 @@ model contribution {
   type             contributionType @relation(fields: [typeId], references: [id], onDelete: Cascade)
 
   likes            likeContribution[]
-  notifications    notification[]
   reports          report[]
 
   @@index([userId])
@@ -122,21 +121,27 @@ model report {
 
 
 // ------------------------------------------------------------------------- > Notification
+model notificationType {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  notifications notification[]
+}
 
 model notification {
-  id             Int        @id @default(autoincrement())
-  userId         Int
-  contributionId Int?
-  message        String     @db.Text
-  isRead         Boolean    @default(false)
-  createdAt      DateTime   @default(now()) @db.Timestamp(0)
+  id                 Int            @id @default(autoincrement())
+  userId             Int
+  notificationTypeId Int       
+  message            String         @db.Text
+  isRead             Boolean        @default(false)
+  createdAt          DateTime       @default(now()) @db.Timestamp(0)
 
-  user           user        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  contribution   contribution? @relation(fields: [contributionId], references: [id], onDelete: Cascade)
+  user           user           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notificationType notificationType @relation(fields: [notificationTypeId], references: [id], onDelete: Cascade)
 
   @@index([userId])
-  @@index([createdAt])
+  @@index([createdAt]) 
 }
+
 
 // ------------------------------------------------------------------------- > Static Data
 
