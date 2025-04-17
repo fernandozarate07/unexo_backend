@@ -1,1 +1,11 @@
-node_modules
+# Node modules
+node_modules/
+
+# Entorno
+.env
+
+# Prisma
+prisma/migrations/**/migration.sql
+
+# Otros
+*.log
