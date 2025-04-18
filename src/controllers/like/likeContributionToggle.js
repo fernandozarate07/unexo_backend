@@ -44,6 +44,9 @@ const updateUserPoints = async (userId) => {
  *
  * @param {import("express").Request} req - Objeto de solicitud HTTP (contiene el ID del aporte y el usuario).
  * @param {import("express").Response} res - Objeto de respuesta HTTP para enviar la respuesta.
+ *
+ * @returns {Object} Respuesta HTTP que indica si el "me gusta" ha sido agregado o eliminado.
+ * @throws {Object} Respuesta HTTP con mensaje de error si ocurre un problema durante la operación.
  */
 const likeContributionToggle = async (req, res) => {
   try {
