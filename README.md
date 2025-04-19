@@ -1,22 +1,96 @@
-# Unexo – Backend
+# Unexo
 
-Unexo es una plataforma de clasificados académicos pensada para estudiantes de la Universidad Nacional de San Juan. Este es el backend de la aplicación, desarrollado con Node.js, Express y MySQL, utilizando Prisma como ORM.
+🌟 ¡Bienvenido/a a Unexo!
+
+Agradecemos tu interés en contribuir a este proyecto de código abierto creado por estudiantes, para estudiantes de la Universidad Nacional de San Juan (UNSJ).
+
+Este archivo documenta tanto el **frontend** como el **backend** del proyecto.
 
 ---
 
 ## 🚀 Funcionalidades implementadas (MVP)
 
-- ✅ Autenticación con Passport (registro, login y verificación de sesión)
-- ✅ Sistema de notificaciones con estado de lectura
-- ✅ Sistema de "Me gusta" y "Guardar" para aportes
-- ✅ Filtro en cascada: tipo, facultad, carrera, año y asignatura
-- ✅ Administración de reportes y moderación
+### Frontend
 
-> 📌 Ya se encuentra desarrollado el MVP. Sin embargo, aún se pueden proponer nuevas funcionalidades o mejoras. ¡Tu aporte es bienvenido!
+📌 Páginas del Frontend:
+
+- ✅ Landing Page.
+- ✅ Presentación del proyecto, beneficios y llamada a acción.
+- ✅ Página de Búsqueda.
+- ✅ Búsqueda de aportes académicos con filtros avanzados.
+- ✅ Página de Aporte.
+- ✅ Detalle completo del aporte (archivos, descripción, autor).
+- ✅ Perfil de Usuario
+- ✅ Usuario: Datos personales,gestion de aportes y registro de puntos.
+- ✅ Panel de Control (por rol)
+- ✅ Moderador: Revisión de reportes y contenido.
+- ✅ Admin: Administración total del sistema.
+
+📌 Funcionalidades:
+
+- ✅ Notificaciones.
+- ✅ Filtro en Cascada.
+- ✅ Búsqueda por: Tipo → Facultad → Carrera → Año → Asignatura.
+
+📌 Interacciones:
+
+- ✅ Like, guardar en favoritos y reportar aportes.
+
+Extras
+
+📌 Diseño responsive, carga rápida de archivos y feedback visual.
+
+### Backend
+
+- ✅ Registro, login, logout y validación de sesiones.
+- ✅ Permisos por tipo de usuario (user/moderador/admin)
+- ✅ Toggle de "me gusta" en aportes.
+- ✅ Alertas para likes/reportes y marcado como leídas.
+- ✅ Búsqueda jerárquica (tipo → facultad → carrera → año → materia)
+- ✅ gestión avanzada y estadisticas.
+- ✅ Denuncia de aportes inapropiados.
+- ✅ Favoritos por usuario.
+- ✅ Validación de datos y sesiones.
+- ✅ Agregar y eliminar aportes.
+- ✅ Guardar aportes.
+- ✅ Verificacion de enlaces en drive.
+
+> 📌 El MVP ya está completo, pero aún podés proponer nuevas ideas o mejoras.
 
 ---
 
-## 🧩 Estructura del proyecto
+## 🛠️ Tecnologías utilizadas
+
+### Frontend
+
+- [Next.js](https://nextjs.org)
+- Chakra UI (v3)
+- Framer Motion
+- Python (Modelos de ML/AI e integraciones futuras)
+
+### Backend
+
+- Node.js
+- Express
+- MySQL
+- Prisma ORM
+- Passport (autenticación)
+
+---
+
+## 📁 Estructura del proyecto
+
+### Frontend
+
+```
+src/
+├── app/                # Páginas principales
+├── components/         # Componentes reutilizables
+├── context/            # Contextos globales
+└── lib/                # Lógica compartida
+```
+
+### Backend
 
 ```
 .
@@ -32,65 +106,33 @@ Unexo es una plataforma de clasificados académicos pensada para estudiantes de 
 └── .env                  # Variables de entorno (no incluida en repo)
 ```
 
----
-
-## ⚙️ Variables de entorno
-
-El proyecto utiliza un archivo `.env` para configurar el entorno de desarrollo. Ejemplo:
-
-```env
-PORT=5001
-DATABASE_URL="mysql://root@localhost:3306/unexo"
-```
-
----
-
-## 📦 Instalación local
-
-1. **Forkeá este repositorio** en tu cuenta.
-2. **Cloná tu fork** en tu máquina local:
-3. **Instalá las dependencias:**
-
-```bash
-npm install
-```
-
-4. **Configurá tu base de datos:**
-   - Asegurate de tener MySQL corriendo localmente.
-   - Modificá `DATABASE_URL` en tu archivo `.env` según tu configuración.
-   - Ejecutá Prisma para crear el esquema:
-
-```bash
-npx prisma migrate dev
-```
-
-5. **Iniciá el servidor:**
-
-```bash
-npm run dev
-```
-
----
-
 ## 🤝 ¿Querés colaborar?
 
-¡Genial! La estructura del backend ya está lista con el MVP, pero se pueden seguir sumando nuevas funcionalidades o mejoras.
-
-### Metodología de contribución
-
 1. Comentá tu idea en el grupo o en un issue.
-2. Una vez validada, **forkeá el repo** y creá una nueva rama (`feature/...`, `fix/...`, etc.).
-3. Desarrollá tu aporte en tu fork.
-4. Abrí un **pull request** a este repositorio principal.
-5. El cambio será revisado, y si está todo OK, será mergeado al proyecto.
+2. Una vez validada, **forkeá** el repositorio y creá una rama (`feature/...`, `fix/...`, etc.).
+3. Desarrollá tu parte localmente.
+4. Abrí un **pull request** hacia este repo.
+5. El cambio será revisado y mergeado si está todo OK.
 
-👉 [Guía de contribución](./CONTRIBUTING.md) (próximamente)
+👉 [Guía de contribución](./CONTRIBUTING.md)
 
 ---
 
-## 🔗 Recursos y comunidad
+## 🔗 Comunidad y contacto
 
-- Grupo de desarrollo: [WhatsApp - Devs UNEXO](https://chat.whatsapp.com/DPCNOOAvl9Z0tmmBNZTFXe)
+👨‍💻 Para desarrolladores
+Únete al grupo de desarrollo: WhatsApp - Devs UNEXO
+
+📖 Para compartir recursos
+Grupo de aportes académicos: WhatsApp - Aportes UNEXO
+
+📩 Contacta al creador
+• Instagram: @zarate.fernando.delvalle
+• Web personal: fernandozarate.website
+• LinkedIn: fernandozaratedev
+
+💡 ¡Tu participación suma!
+Colabora proponiendo ideas, resolviendo dudas o contribuyendo al proyecto.
 
 ---
 
