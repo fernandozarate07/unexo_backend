@@ -126,10 +126,12 @@ src/
 📖 Para compartir recursos
 Grupo de aportes académicos: WhatsApp - Aportes UNEXO
 
-📩 Contacta al creador
+📩 Contacta al fundador de Unexo:
 • Instagram: @zarate.fernando.delvalle
 • Web personal: fernandozarate.website
 • LinkedIn: fernandozaratedev
+
+📩 Contacta al cofundador de Unexo:
 
 💡 ¡Tu participación suma!
 Colabora proponiendo ideas, resolviendo dudas o contribuyendo al proyecto.

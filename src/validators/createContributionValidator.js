@@ -1,8 +1,18 @@
 const { body } = require("express-validator");
 
 const contributionValidator = [
-  body("title").notEmpty().withMessage("El título es obligatorio"),
-  body("description").notEmpty().withMessage("La descripción es obligatoria"),
+  body("title")
+    .optional()
+    .isString()
+    .withMessage("El título debe ser un texto")
+    .isLength({ min: 15, max: 100 })
+    .withMessage("El título debe tener entre 15 y 100 caracteres"),
+  body("description")
+    .optional()
+    .isString()
+    .withMessage("La descripción debe ser un texto")
+    .isLength({ min: 15, max: 500 })
+    .withMessage("La descripción no puede exceder los 500 caracteres"),
   body("linkDrive")
     .isURL()
     .withMessage("El link de Google Drive debe ser una URL válida")

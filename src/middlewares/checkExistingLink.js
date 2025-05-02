@@ -3,7 +3,8 @@ const prisma = require("../config/prisma");
 
 /**
  * Middleware para verificar si un enlace de Google Drive ya existe en la base de datos.
- * Este middleware se asegura de que el enlace no haya sido utilizado previamente en otro aporte.
+ * Este middleware se asegura de que el enlace no haya sido utilizado previamente en otro aporte,
+ * excepto si el enlace pertenece al mismo aporte que está siendo editado.
  *
  * @param {Object} req - El objeto de solicitud HTTP.
  * @param {Object} res - El objeto de respuesta HTTP.
@@ -15,7 +16,7 @@ const prisma = require("../config/prisma");
  *  - 200: Si el enlace no existe y se pasa al siguiente middleware.
  */
 async function checkExistingLink(req, res, next) {
-  const { linkDrive } = req.body; // Desestructuramos el enlace desde el cuerpo de la solicitud.
+  const { linkDrive, contributionId } = req.body; // Desestructuramos el enlace y el ID del aporte desde el cuerpo de la solicitud.
 
   // Verifica si el enlace fue proporcionado en la solicitud
   if (!linkDrive) {
@@ -23,10 +24,11 @@ async function checkExistingLink(req, res, next) {
   }
 
   try {
-    // Verifica si el enlace ya existe en la base de datos utilizando Prisma
+    // Verifica si el enlace ya existe en la base de datos utilizando Prisma, pero ignorando el aporte actual si contributionId está presente
     const existingContribution = await prisma.contribution.findFirst({
       where: {
         url: linkDrive, // Compara el enlace con los existentes en la base de datos.
+        NOT: { id: contributionId }, // Excluye el aporte actual si contributionId está presente
       },
     });
 

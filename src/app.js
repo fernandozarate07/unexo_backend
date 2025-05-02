@@ -9,7 +9,7 @@ const app = express();
 
 // Importación de rutas
 const authRoutes = require("./routes/authRoutes.js");
-// const userRoutes = require("./routes/userRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 const likeRoutes = require("./routes/likeRoutes.js");
 // const appRoutes = require("./routes/appRoutes.js");
@@ -51,7 +51,7 @@ app.use(passport.session());
 // app.use("/api/app", appRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
-// app.use("/api/user", userRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/filter", cascadeFilterRoutes);
 app.use("/api/like", likeRoutes);
 app.use("/api/notification", notificationRoutes);
