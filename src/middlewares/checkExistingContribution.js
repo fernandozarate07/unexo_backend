@@ -23,7 +23,7 @@ const checkExistingContribution = async (req, res, next) => {
 
     // Si no se encuentra el aporte, responde con un error 404
     if (!contribution) {
-      return res.status(404).json({ message: "Aporte no encontrado" });
+      return res.status(404).json({ message: "ERROR: Aporte no encontrado" });
     }
 
     // Si el aporte existe, pasa al siguiente middleware o controlador

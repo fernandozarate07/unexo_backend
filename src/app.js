@@ -17,6 +17,8 @@ const cascadeFilterRoutes = require("./routes/cascadeFilterRoutes.js");
 const notificationRoutes = require("./routes/notificationRoutes.js");
 // const crudRoutes = require("./routes/crudRoutes.js");
 const contributionRoutes = require("./routes/contributionRoutes.js");
+const savedContributionRoutes = require("./routes/savedContributionRoutes.js");
+
 // const reportRoutes = require("./routes/reportRoutes.js");
 
 // Middlewares
@@ -58,6 +60,8 @@ app.use("/api/notification", notificationRoutes);
 
 // app.use("/api/crud", crudRoutes);
 app.use("/api/contribution", contributionRoutes);
+app.use("/api/savedContribution", savedContributionRoutes);
+
 // app.use("/api/report", reportRoutes);
 
 app.get("/", (req, res) => {

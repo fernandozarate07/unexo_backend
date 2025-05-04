@@ -66,6 +66,6 @@ router.delete("/delete/:id", checkSessionFlow, deleteContributionValidator, vali
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. recupera los aportes del usuario
 router.get("/recoverUserContributions", checkSessionFlow, recoverUserContributions);
-// Exportación del router para ser utilizado en app.js u otro archivo principal
 
+// Exportación del router para ser utilizado en app.js u otro archivo principal
 module.exports = router;
