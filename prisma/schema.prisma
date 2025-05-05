@@ -34,6 +34,8 @@ model user {
   reports                report[]
   notifications          notification[]
   savedContributions     savedContribution[]
+  download               DownloadContribution[]
+
 
 }
 
@@ -70,6 +72,8 @@ model contribution {
   likes            likeContribution[]
   reports          report[]
   savedByUsers     savedContribution[]
+  download         DownloadContribution[]
+
 
 
   @@index([userId])
@@ -81,6 +85,23 @@ model contribution {
   @@index([isActive])
   @@index([createdAt])
 }
+// ------------------------------------------------------------------------- > DownloadContributions
+model DownloadContribution {
+  id              Int           @id @default(autoincrement())
+  userId          Int
+  contributionId  Int
+  downloadedAt    DateTime      @default(now()) @db.Timestamp(0)
+
+  user            user          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contribution    contribution  @relation(fields: [contributionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([contributionId])
+  @@index([downloadedAt])
+  @@unique([userId, contributionId])
+
+}
+
 // ------------------------------------------------------------------------- > SavedContributions
 
 model savedContribution {
