@@ -86,7 +86,7 @@ model contribution {
   @@index([createdAt])
 }
 // ------------------------------------------------------------------------- > DownloadContributions
-model DownloadContribution {
+model downloadContribution {
   id              Int           @id @default(autoincrement())
   userId          Int
   contributionId  Int

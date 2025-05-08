@@ -8,16 +8,18 @@ require("./config/passport");
 const app = express();
 
 // Importación de rutas
+
+// const crudRoutes = require("./routes/crudRoutes.js");
+// const appRoutes = require("./routes/appRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 const likeRoutes = require("./routes/likeRoutes.js");
-// const appRoutes = require("./routes/appRoutes.js");
 const cascadeFilterRoutes = require("./routes/cascadeFilterRoutes.js");
 const notificationRoutes = require("./routes/notificationRoutes.js");
-// const crudRoutes = require("./routes/crudRoutes.js");
 const contributionRoutes = require("./routes/contributionRoutes.js");
 const savedContributionRoutes = require("./routes/savedContributionRoutes.js");
+const downloadContributionRoutes = require("./routes/downloadContributionRoutes.js");
 
 // const reportRoutes = require("./routes/reportRoutes.js");
 
@@ -61,6 +63,7 @@ app.use("/api/notification", notificationRoutes);
 // app.use("/api/crud", crudRoutes);
 app.use("/api/contribution", contributionRoutes);
 app.use("/api/savedContribution", savedContributionRoutes);
+app.use("/api/downloadContribution", downloadContributionRoutes);
 
 // app.use("/api/report", reportRoutes);
 
