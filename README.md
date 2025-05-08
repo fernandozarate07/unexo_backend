@@ -2,7 +2,7 @@
 
 🌟 ¡Bienvenido/a a Unexo!
 
-Agradecemos tu interés en contribuir a este proyecto de código abierto creado por estudiantes, para estudiantes de la Universidad Nacional de San Juan (UNSJ).
+Agradecemos tu interés en este proyecto, que sigue siendo creado por y para estudiantes de la Universidad Nacional de San Juan (UNSJ). Sin embargo, debido a la necesidad de mantener el proyecto operativo, hemos decidido modificar su modelo para generar ingresos y garantizar su sostenibilidad.
 
 Este archivo documenta tanto el **frontend** como el **backend** del proyecto.
 
@@ -20,9 +20,9 @@ Este archivo documenta tanto el **frontend** como el **backend** del proyecto.
 - ✅ Búsqueda de aportes académicos con filtros avanzados.
 - ✅ Página de Aporte.
 - ✅ Detalle completo del aporte (archivos, descripción, autor).
-- ✅ Perfil de Usuario
-- ✅ Usuario: Datos personales,gestion de aportes y registro de puntos.
-- ✅ Panel de Control (por rol)
+- ✅ Perfil de Usuario.
+- ✅ Usuario: Datos personales, gestión de aportes y registro de puntos.
+- ✅ Panel de Control (por rol).
 - ✅ Moderador: Revisión de reportes y contenido.
 - ✅ Admin: Administración total del sistema.
 
@@ -43,19 +43,19 @@ Extras
 ### Backend
 
 - ✅ Registro, login, logout y validación de sesiones.
-- ✅ Permisos por tipo de usuario (user/moderador/admin)
+- ✅ Permisos por tipo de usuario (user/moderador/admin).
 - ✅ Toggle de "me gusta" en aportes.
 - ✅ Alertas para likes/reportes y marcado como leídas.
-- ✅ Búsqueda jerárquica (tipo → facultad → carrera → año → materia)
-- ✅ gestión avanzada y estadisticas.
+- ✅ Búsqueda jerárquica (tipo → facultad → carrera → año → materia).
+- ✅ Gestión avanzada y estadísticas.
 - ✅ Denuncia de aportes inapropiados.
 - ✅ Favoritos por usuario.
 - ✅ Validación de datos y sesiones.
 - ✅ Agregar y eliminar aportes.
 - ✅ Guardar aportes.
-- ✅ Verificacion de enlaces en drive.
+- ✅ Verificación de enlaces en drive.
 
-> 📌 El MVP ya está completo, pero aún podés proponer nuevas ideas o mejoras.
+> 📌 El MVP ya está completo, pero estamos abiertos a nuevas ideas y mejoras. Si tienes propuestas, no dudes en compartirlas.
 
 ---
 
@@ -82,62 +82,39 @@ Extras
 
 ### Frontend
 
-```
 src/
-├── app/                # Páginas principales
-├── components/         # Componentes reutilizables
-├── context/            # Contextos globales
-└── lib/                # Lógica compartida
-```
+├── app/ # Páginas principales
+├── components/ # Componentes reutilizables
+├── context/ # Contextos globales
+└── lib/ # Lógica compartida
 
 ### Backend
 
-```
 .
-├── prisma/               # Esquema y migraciones de Prisma
+├── prisma/ # Esquema y migraciones de Prisma
 ├── src/
-│   ├── config/           # Configuración de Prisma y Passport
-│   ├── controllers/      # Controladores de cada funcionalidad
-│   ├── middlewares/      # Middlewares de validación y seguridad
-│   ├── routes/           # Rutas Express agrupadas por función
-│   ├── validators/       # Validadores de datos
-│   └── app.js            # Configuración de la app Express
-├── server.js             # Entrada principal del servidor
-└── .env                  # Variables de entorno (no incluida en repo)
-```
+│ ├── config/ # Configuración de Prisma y Passport
+│ ├── controllers/ # Controladores de cada funcionalidad
+│ ├── middlewares/ # Middlewares de validación y seguridad
+│ ├── routes/ # Rutas Express agrupadas por función
+│ ├── validators/ # Validadores de datos
+│ └── app.js # Configuración de la app Express
+├── server.js # Entrada principal del servidor
+└── .env # Variables de entorno (no incluida en repo)
 
-## 🤝 ¿Querés colaborar?
+## 🛡️ Licencia
 
-1. Comentá tu idea en el grupo o en un issue.
-2. Una vez validada, **forkeá** el repositorio y creá una rama (`feature/...`, `fix/...`, etc.).
-3. Desarrollá tu parte localmente.
-4. Abrí un **pull request** hacia este repo.
-5. El cambio será revisado y mergeado si está todo OK.
+Este proyecto es de uso exclusivo para los responsables de su desarrollo y gestión. El contenido compartido por los usuarios en la app debe respetar los derechos de autor correspondientes.
 
-👉 [Guía de contribución](./CONTRIBUTING.md)
+Este proyecto ya no es de código abierto. Su uso está sujeto a un acuerdo de licencia comercial. Cualquier uso no autorizado, copia, modificación, distribución o divulgación del código fuente está prohibido sin el permiso explícito del autor.
 
 ---
 
 ## 🔗 Comunidad y contacto
 
-👨‍💻 Para desarrolladores
-Únete al grupo de desarrollo: WhatsApp - Devs UNEXO
+• Instagram: [@unexoapp](https://instagram.com/unexoapp)  
+• Gmail: unexoapp@gmail.com
 
-📖 Para compartir recursos
-Grupo de aportes académicos: WhatsApp - Aportes UNEXO
-
-📩 Contacta al fundador de Unexo:
-• Instagram: @zarate.fernando.delvalle
-• Web personal: fernandozarate.website
-• LinkedIn: fernandozaratedev
-
-📩 Contacta al cofundador de Unexo:
-
-💡 ¡Tu participación suma!
-Colabora proponiendo ideas, resolviendo dudas o contribuyendo al proyecto.
+💡 ¡Tu participación suma! Si tienes alguna idea, comentario o inquietud, no dudes en contactarnos.
 
 ---
-
-## 🛡️ Licencia
-
-Este proyecto es de uso personal. El contenido compartido por los usuarios en la app debe respetar los derechos de autor correspondientes.
