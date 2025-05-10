@@ -3,7 +3,7 @@ const updateNexoPoints = require("../../services/updateNexoPoints");
 
 const downloadContribution = async (req, res) => {
   const DOWNLOAD_COST = 5;
-  const AUTHOR_REWARD = 1;
+  const AUTHOR_REWARD = 5;
 
   const userId = req.user.id;
   const contributionId = parseInt(req.params.id);
@@ -37,6 +37,14 @@ const downloadContribution = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "ERROR: Aporte no encontrado.",
+      });
+    }
+
+    // VALIDACIÓN NUEVA: no permitir que el autor descargue su propio aporte
+    if (contribution.userId === userId) {
+      return res.status(400).json({
+        success: false,
+        message: "ERROR: No puedes descargar tu propio aporte.",
       });
     }
 

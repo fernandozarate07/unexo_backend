@@ -9,7 +9,7 @@ const prisma = require("../../config/prisma");
  * @param {Object} res - Objeto de la respuesta (Response).
  * @returns {Promise} - Respuesta en formato JSON con el mensaje de éxito o error.
  */
-const savedContributionToggle = async (req, res) => {
+const recoverSavedStateContribution = async (req, res) => {
   // Obtener el ID del usuario desde la sesión (req.user.id)
   const userId = req.user.id;
 
@@ -27,46 +27,31 @@ const savedContributionToggle = async (req, res) => {
       },
     });
 
-    // Si la contribución ya está guardada, proceder a eliminarla
+    // Si la contribución ya está guardada
     if (existingSavedContribution) {
-      // Eliminar el aporte guardado de la base de datos
-      await prisma.savedContribution.delete({
-        where: {
-          userId_contributionId: {
-            userId, // ID del usuario
-            contributionId, // ID de la contribución
-          },
-        },
-      });
-
-      // Responder con mensaje de éxito y código de estado 200 (OK)
+      // Si ya está guardado, responder con el estado true
       return res.status(200).json({
         success: true,
-        message: "SUCCESS: El aporte fue quitado de aportes guardados.",
+        message: "El aporte ya está guardado.",
+        isSaved: true,
       });
     } else {
-      // Si la contribución no está guardada, proceder a agregarla
-      await prisma.savedContribution.create({
-        data: {
-          userId, // ID del usuario
-          contributionId, // ID de la contribución
-        },
-      });
-
-      // Responder con mensaje de éxito y código de estado 201 (CREATED)
-      return res.status(201).json({
+      // Si no está guardado, responder con el estado false
+      return res.status(200).json({
         success: true,
-        message: "SUCCESS: El aporte fue agregado a aportes guardados.",
+        message: "El aporte no está guardado.",
+        isSaved: false,
       });
     }
   } catch (error) {
     // Si ocurre un error durante la operación, responder con código de estado 500 (INTERNAL SERVER ERROR)
     return res.status(500).json({
       success: false,
-      message: "ERROR: Se produjo un error interno del servidor",
+      message: "Se produjo un error interno del servidor",
+      isSaved: false,
     });
   }
 };
 
 // Exportar el controlador para ser utilizado en las rutas
-module.exports = savedContributionToggle;
+module.exports = recoverSavedStateContribution;
