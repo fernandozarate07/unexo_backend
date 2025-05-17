@@ -6,9 +6,11 @@ const router = express.Router();
 const { logoutUser, loginUser } = require("../controllers/auth/loginLogoutUser");
 const registerUser = require("../controllers/auth/registerUser");
 const sessionStatus = require("../controllers/auth/sessionStatus");
+const updatePassword = require("../controllers/auth/updatePassword");
 
 // Validator require
 const authValidator = require("../validators/authValidator");
+const updatePasswordValidator = require("../validators/updatePasswordValidator");
 
 // Middleware require
 const validateDataRequest = require("../middlewares/validateDataRequest");
@@ -19,7 +21,9 @@ router.post("/register", authValidator, validateDataRequest, registerUser);
 router.post("/login", loginUser);
 router.post("/logout", checkSessionFlow, logoutUser);
 router.get("/sessionStatus", sessionStatus);
-// router.post("/forgot-password", forgotPassword);
+
+// cambiar contraseña y recuperarla
+router.put("/updatePassword", checkSessionFlow, updatePasswordValidator, validateDataRequest, updatePassword);
 // router.post("/reset-forgot-password", resetForgotPassword);
 
 module.exports = router;

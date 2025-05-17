@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// nombre
+// controladores
 const updateName = require("../controllers/user/data/updateName");
 
 // subir y editar foto
@@ -28,6 +28,7 @@ router.put(
   validateImageRequest,
   handleProfilePhoto
 );
+
 // editar o cambiar nombre
 router.put("/updateName", checkSessionFlow, updateNameValidator, validateDataRequest, updateName);
 
