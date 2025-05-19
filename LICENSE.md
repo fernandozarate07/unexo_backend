@@ -1,4 +1,4 @@
-Copyright (c) 2025 Fernando Aníbal del Valle Zárate y Kevin Alexis Guevara.
+Copyright (c) 2025 Fernando Aníbal del Valle Zárate.
 
 Todos los derechos reservados.
 
