@@ -16,26 +16,18 @@ const recoverSavedStateContribution = require("../controllers/savedContribution/
 // Ruta para recuperar los aportes de un usuario
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. Verifica si existe una aporte -> 3. controlador que envia el estado de si el aporte se encuentra o no guardado
-router.get(
-  "/recoverSavedStateContribution/:id",
-  checkSessionFlow,
-  checkExistingContribution,
-  recoverSavedStateContribution
-);
-
+router.get("/:id", checkSessionFlow, checkExistingContribution, recoverSavedStateContribution);
 //-------------------------------------------------
 
 // Ruta para recuperar los aportes de un usuario
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. Verifica si existe una aporte -> 3. controlador para agregar o quitar de aportes guardados
-router.post("/savedContributionToggle/:id", checkSessionFlow, checkExistingContribution, savedContributionToggle);
-
+router.post("/:id/toggle", checkSessionFlow, checkExistingContribution, savedContributionToggle);
 //-------------------------------------------------
 
 // Ruta para recuperar los aportes de un usuario
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. recupera los aportes guardados del usuario
-router.get("/recoverUserSavedContributions", checkSessionFlow, recoverUserSavedContributions);
-
+router.get("/", checkSessionFlow, recoverUserSavedContributions);
 // Exportación del router para ser utilizado en app.js u otro archivo principal
 module.exports = router;

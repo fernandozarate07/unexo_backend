@@ -19,17 +19,15 @@ const updateNameValidator = require("../validators/updateNameValidator");
 
 // RUTAS ------------------------------------------------------------
 
-// Subir o actualizar foto de perfil
+// Actualizar foto de perfil
 router.put(
-  "/handleProfilePicture",
+  "/profile-picture",
   checkSessionFlow,
   cloudinaryImageUploader,
   imageValidator,
   validateImageRequest,
   handleProfilePhoto
 );
-
-// editar o cambiar nombre
-router.put("/updateName", checkSessionFlow, updateNameValidator, validateDataRequest, updateName);
-
+// Actualizar nombre
+router.put("/name", checkSessionFlow, updateNameValidator, validateDataRequest, updateName);
 module.exports = router;

@@ -20,10 +20,9 @@ const checkSessionFlow = require("../middlewares/checkSessionFlow");
 router.post("/register", authValidator, validateDataRequest, registerUser);
 router.post("/login", loginUser);
 router.post("/logout", checkSessionFlow, logoutUser);
-router.get("/sessionStatus", sessionStatus);
+router.get("/session", sessionStatus);
+router.put("/password", checkSessionFlow, updatePasswordValidator, validateDataRequest, updatePassword);
 
-// cambiar contraseña y recuperarla
-router.put("/updatePassword", checkSessionFlow, updatePasswordValidator, validateDataRequest, updatePassword);
 // router.post("/reset-forgot-password", resetForgotPassword);
 
 module.exports = router;

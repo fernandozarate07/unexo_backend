@@ -6,7 +6,9 @@ const checkExistingContribution = require("../middlewares/checkExistingContribut
 const likeContributionToggle = require("../controllers/like/likeContributionToggle");
 const recoverLikeState = require("../controllers/like/recoverLikeState");
 
-router.get("/recoverLikeState/:id", checkSessionFlow, checkExistingContribution, recoverLikeState);
-router.post("/likeToggle/:id", checkSessionFlow, checkExistingContribution, likeContributionToggle);
+// Obtener estado del like de una contribución
+router.get("/:id", checkSessionFlow, checkExistingContribution, recoverLikeState);
+// Alternar like para una contribución
+router.post("/:id/toggle", checkSessionFlow, checkExistingContribution, likeContributionToggle);
 
 module.exports = router;

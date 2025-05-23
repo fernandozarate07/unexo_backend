@@ -13,7 +13,8 @@ const prisma = require("../../config/prisma");
  */
 const updateContribution = async (req, res) => {
   try {
-    const { title, description, isActive, linkDrive, contributionId } = req.body;
+    const { title, description, isActive, linkDrive } = req.body;
+    const contributionId = parseInt(req.params.id, 10); // recuperar el ID del aporte desde la URL
     const userId = req.user.id; // ID del usuario (de la sesión/token)
 
     // Verificar si el aporte existe y pertenece al usuario

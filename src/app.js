@@ -52,19 +52,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Rutas API
+
 // app.use("/api/app", appRoutes);
-app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/filter", cascadeFilterRoutes);
-app.use("/api/like", likeRoutes);
-app.use("/api/notification", notificationRoutes);
-
-// app.use("/api/crud", crudRoutes);
 app.use("/api/contribution", contributionRoutes);
-app.use("/api/savedContribution", savedContributionRoutes);
 app.use("/api/downloadContribution", downloadContributionRoutes);
-
+app.use("/api/savedContribution", savedContributionRoutes);
+app.use("/api/like", likeRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/notification", notificationRoutes);
+// app.use("/api/crud", crudRoutes);
 // app.use("/api/report", reportRoutes);
 
 app.get("/", (req, res) => {

@@ -4,7 +4,7 @@ const router = express.Router();
 const cascadeFilter = require("../controllers/cascadeFilter/cascadeFilter");
 const recoverData = require("../controllers/cascadeFilter/recoverData");
 
-router.get("/cascadeFilter", cascadeFilter);
-router.get("/recoverData", recoverData);
+router.get("/options", cascadeFilter);
+router.get("/prefill", recoverData);
 
 module.exports = router;

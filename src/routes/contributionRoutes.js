@@ -20,7 +20,7 @@ const deleteContributionValidator = require("../validators/deleteContributionVal
 const validateDataRequest = require("../middlewares/validateDataRequest"); // Middleware que maneja errores de validación
 
 // Ruta para verificar si un link es público (utilizada de forma independiente)
-router.post("/checkIsPublicLink", checkIsPublicLink);
+router.post("/verify-link", checkIsPublicLink);
 
 //-------------------------------------------------
 
@@ -29,14 +29,13 @@ router.post("/checkIsPublicLink", checkIsPublicLink);
 // 1. Verifica sesión -> 2. Valida datos -> 3. Maneja errores de validación
 // 4. Verifica duplicación de enlace -> 5. Crea el aporte
 router.post(
-  "/create",
+  "/",
   checkSessionFlow,
   createContributionValidator,
   validateDataRequest,
   checkExistingLink,
   createContribution
 );
-
 //-------------------------------------------------
 
 // Ruta para editar un aporte existente
@@ -44,28 +43,29 @@ router.post(
 // 1. Verifica sesión -> 2. Valida datos  -> 3. Maneja errores de validación
 // 4. Verifica duplicación de enlace -> 5. edita el aporte
 router.put(
-  "/update",
+  "/:id",
   checkSessionFlow,
   updateContributionValidator,
   validateDataRequest,
   checkExistingLink,
   updateContribution
 );
-
 //-------------------------------------------------
 
 // Ruta para borrar un aporte existente
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. Valida datos  -> 3. Maneja errores de validación
 // 4. Borra la contribucion y todas las relaciones asociadas de otras tablas a esa contribución
-router.delete("/delete/:id", checkSessionFlow, deleteContributionValidator, validateDataRequest, deleteContribution);
+router.delete("/:id", checkSessionFlow, deleteContributionValidator, validateDataRequest, deleteContribution);
 
 //-------------------------------------------------
 
 // Ruta para recuperar los aportes de un usuario
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. recupera los aportes del usuario
-router.get("/recoverUserContributions", checkSessionFlow, recoverUserContributions);
+router.get("/my", checkSessionFlow, recoverUserContributions);
+
+//-------------------------------------------------
 
 // Exportación del router para ser utilizado en app.js u otro archivo principal
 module.exports = router;

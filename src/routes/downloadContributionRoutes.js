@@ -14,7 +14,7 @@ const downloadContribution = require("../controllers/downloadContribution/downlo
 
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. Verifica si existe una aporte -> 3. controlador que crea la descarga.
-router.post("/create/:id", checkSessionFlow, checkExistingContribution, downloadContribution);
+router.post("/:id", checkSessionFlow, checkExistingContribution, downloadContribution);
 // Exportación del router para ser utilizado en app.js u otro archivo principal
 
 //-------------------------------------------------
@@ -23,7 +23,7 @@ router.post("/create/:id", checkSessionFlow, checkExistingContribution, download
 
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. recupera los aportes guardados del usuario -> 3.recupera las contribuciones descargadas por el usuario.
-router.get("/recover", checkSessionFlow, recoverDownloadContributions);
+router.get("/", checkSessionFlow, recoverDownloadContributions);
 
 // Exportación del router para ser utilizado en app.js u otro archivo principal
 module.exports = router;

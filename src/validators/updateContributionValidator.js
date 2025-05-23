@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
 
 const updateContributionValidator = [
   // Validación para el título (opcional pero si está presente, debe ser string y tener entre 3 y 100 caracteres)
@@ -27,11 +27,7 @@ const updateContributionValidator = [
     .matches(/drive\.google\.com/)
     .withMessage("El link debe ser de Google Drive"),
   // Validación para el contributionId (obligatorio y debe ser un número)
-  body("contributionId")
-    .notEmpty()
-    .withMessage("El ID del aporte es obligatorio")
-    .isInt()
-    .withMessage("El ID del aporte debe ser un número entero"),
+  param("id").notEmpty().withMessage("El ID del aporte es obligatorio"),
 ];
 
 module.exports = updateContributionValidator;

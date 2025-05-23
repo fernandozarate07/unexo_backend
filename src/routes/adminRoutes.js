@@ -21,8 +21,8 @@ const { resetDynamicData, resetStaticData } = require("../controllers/admin/data
 // Routes
 
 // Data reset routes
-router.post("/resetDynamicData", resetDynamicData);
-router.post("/resetStaticData", resetStaticData);
+router.post("/reset/dynamic", resetDynamicData);
+router.post("/reset/static", resetStaticData);
 
 // Role management
 // router.post("/updateRole", checkIsAdmin, updateRoleValidator, validateDataRequest, updateRole);
