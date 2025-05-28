@@ -15,24 +15,25 @@ const loginUser = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     // Si ocurre un error interno durante la autenticación
     if (err) {
-      return res.status(500).json({ message: "ERROR: Ocurrió un error durante la autenticación", error: err });
+      return res.status(500).json({ success: false, message: "ERROR: Se produjo un error interno del servidor" });
     }
 
     // Si no se encontró un usuario válido (credenciales incorrectas, etc.)
     if (!user) {
-      return res.status(400).json({ message: info?.message || "No se pudo autenticar al usuario" });
+      return res.status(404).json({ success: false, message: "ERROR: No se pudo autenticar al usuario" });
     }
 
     // Si el usuario fue autenticado correctamente, iniciar sesión con req.logIn
     req.logIn(user, (err) => {
       // Error al crear la sesión
       if (err) {
-        return res.status(500).json({ message: "ERROR: No se pudo iniciar sesión", error: err });
+        return res.status(500).json({ success: false, message: "ERROR: No se pudo iniciar sesión" });
       }
 
       // Enviar respuesta exitosa con los datos del usuario autenticado
       return res.status(200).json({
-        message: "Inicio de sesión exitoso",
+        success: true,
+        message: "SUCCESS: Inicio de sesión exitoso",
         user: {
           id: user.id,
           name: user.name,
@@ -59,11 +60,11 @@ const logoutUser = (req, res) => {
   // Llama a logout y maneja posibles errores
   req.logout((err) => {
     if (err) {
-      return res.status(500).json({ message: "ERROR: Error al cerrar sesión", error: err });
+      return res.status(500).json({ success: false, message: "ERROR: Error al cerrar sesión" });
     }
 
     // Si todo salió bien, confirma que la sesión fue cerrada
-    res.status(200).json({ message: "Sesión cerrada correctamente" });
+    res.status(200).json({ success: true, message: "SUCCESS: Sesión cerrada correctamente" });
   });
 };
 

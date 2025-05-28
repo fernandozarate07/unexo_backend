@@ -9,12 +9,9 @@
  * @returns {void} Llama a `next()` si hay una sesión activa, o responde con un error 401 si no la hay.
  */
 const checkSessionFlow = (req, res, next) => {
-  // Mostrar en consola el usuario actual (útil para debug)
-  console.log("req.user:", req.user);
-
   // Si no hay un usuario en la sesión, se deniega el acceso y se interrumpe el flujo
   if (!req.user) {
-    return res.status(401).json({ message: "ERROR: No hay sesión activa" });
+    return res.status(401).json({ success: false, message: "ERROR: No hay sesión activa" });
   }
 
   // Si la sesión está activa, continúa con el flujo

@@ -12,7 +12,7 @@ const updatePassword = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({ success: false, message: "ERROR: Usuario no encontrado" });
+      return res.status(401).json({ success: false, message: "ERROR: Usuario no encontrado" });
     }
 
     // Verificar que la contraseña actual coincida
@@ -33,7 +33,7 @@ const updatePassword = async (req, res) => {
 
     return res.status(200).json({ success: true, message: "SUCCESS: Contraseña cambiada con éxito" });
   } catch (err) {
-    return res.status(500).json({ success: false, message: "ERROR: Error interno del servidor", error: err.message });
+    return res.status(500).json({ success: false, message: "ERROR: Error interno del servidor" });
   }
 };
 

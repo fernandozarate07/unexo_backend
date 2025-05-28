@@ -23,14 +23,14 @@ const checkExistingContribution = async (req, res, next) => {
 
     // Si no se encuentra el aporte, responde con un error 404
     if (!contribution) {
-      return res.status(404).json({ message: "ERROR: Aporte no encontrado" });
+      return res.status(404).json({ success: false, message: "ERROR: Aporte no encontrado" });
     }
 
     // Si el aporte existe, pasa al siguiente middleware o controlador
     next();
   } catch (error) {
     // Si ocurre un error en la consulta o en cualquier parte del proceso, responde con un error 500
-    return res.status(500).json({ message: "ERROR: Se produjo un error interno del servidor" });
+    return res.status(500).json({ success: false, message: "ERROR: Se produjo un error interno del servidor" });
   }
 };
 

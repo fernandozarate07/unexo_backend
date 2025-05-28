@@ -25,9 +25,8 @@ const markAsRead = async (req, res) => {
     // Responder con el objeto de la notificación actualizada
     res.status(200).json(updatedNotification);
   } catch (error) {
-    console.error("Error marcando notificación como leída:", error);
     // En caso de error, responder con un mensaje de error
-    res.status(500).json({ error: "Error marcando notificación como leída" });
+    res.status(500).json({ message: "ERROR: Error marcando notificación como leída" });
   }
 };
 

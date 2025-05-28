@@ -52,13 +52,12 @@ const handleProfilePhoto = async (req, res) => {
 
     // Responder con el mensaje adecuado
     res.status(200).json({
+      success: true,
       message: currentUser?.profilePhoto ? "Profile updated" : "Upload successful",
       profilePhoto: updatedUser.profilePhoto, // Devolver la nueva foto de perfil
     });
   } catch (error) {
-    console.error("Profile picture error:", error); // Log de error
-    res.status(500).json({ message: "Image processing failed" }); // Respuesta en caso de error
+    res.status(500).json({ success: false, message: "ERROR: Error la intentar subir la foto" }); // Respuesta en caso de error
   }
 };
-
 module.exports = handleProfilePhoto;

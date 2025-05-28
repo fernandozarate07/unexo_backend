@@ -24,7 +24,8 @@ const registerUser = async (req, res) => {
 
     // Si ya hay un usuario con ese email, devolvemos error
     if (existingUser) {
-      return res.status(400).json({
+      return res.status(404).json({
+        success: false,
         message: "ERROR: Este email ya fue ocupado",
       });
     }
@@ -42,7 +43,8 @@ const registerUser = async (req, res) => {
     });
 
     // Devolvemos respuesta exitosa con el ID del nuevo usuario
-    return res.status(201).json({
+    return res.status(200).json({
+      success: true,
       message: "Usuario creado con éxito",
       user: {
         id: newUser.id,
@@ -50,8 +52,7 @@ const registerUser = async (req, res) => {
     });
   } catch (err) {
     // Log y respuesta en caso de error inesperado
-    console.error("(registerUser) -> ERROR: No se ha podido crear el usuario", err);
-    res.status(500).json({ message: "ERROR: No se ha podido crear el usuario", error: err.message });
+    res.status(500).json({ success: false, message: "ERROR: No se ha podido crear el usuario" });
   }
 };
 

@@ -17,7 +17,7 @@ const validateDataRequest = (req, res, next) => {
 
   // Si existen errores, respondemos con un error 400 y los detalles de los errores
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ success: false, message: errors.array() });
   }
 
   // Si no hay errores, continuamos con el flujo

@@ -30,7 +30,7 @@ const handleCloudinaryCleanup = async (file) => {
     console.log("Se limpió Cloudinary:", publicId); // Log de éxito
     await cloudinary.uploader.destroy(publicId); // Eliminar el archivo de Cloudinary
   } catch (error) {
-    console.error("Error: error al limpiar Cloudinary", error.message); // Log de error
+    console.error("(validateImageRequest.js) -> ERROR: error al limpiar Cloudinary", error.message); // Log de error
   }
 };
 

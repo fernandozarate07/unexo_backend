@@ -15,7 +15,7 @@ const sessionStatus = (req, res, next) => {
 
   // Si no hay usuario en la sesión, devolver estado 401 (no autorizado)
   if (!req.user) {
-    return res.status(401).json({ message: "No hay sesión activa" });
+    return res.status(401).json({ success: false, message: "ERROR: No hay sesión activa" });
   }
 
   // Extraer solo los datos necesarios del usuario (evita exponer info sensible)
@@ -23,7 +23,8 @@ const sessionStatus = (req, res, next) => {
 
   // Responder con estado 200 e info básica del usuario
   return res.status(200).json({
-    message: "Sesión activa",
+    success: true,
+    message: "SUCCESS: Sesión activa",
     user: { id, name, email, profilePhoto, role, points },
   });
 };

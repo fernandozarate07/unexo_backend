@@ -29,8 +29,7 @@ const notificationsStatus = async (req, res) => {
 
     return res.status(200).json(notifications);
   } catch (error) {
-    console.error("Error al obtener las notificaciones:", error);
-    return res.status(500).json({ error: "Error interno al obtener las notificaciones" });
+    return res.status(500).json({ message: "ERROR: Error interno al obtener las notificaciones" });
   }
 };
 

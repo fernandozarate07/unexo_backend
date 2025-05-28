@@ -40,8 +40,8 @@ const recoverUserSavedContributions = async (req, res) => {
     // Si no hay contribuciones guardadas, devuelve un error 404
     if (!savedContributions || savedContributions.length === 0) {
       return res.status(200).json({
-        message: "!FOUND: No se encontro aportes guardados",
         success: true,
+        message: "!FOUND: No se encontro aportes guardados",
         savedContributions: savedContributions,
       });
     }
@@ -53,7 +53,7 @@ const recoverUserSavedContributions = async (req, res) => {
     });
   } catch (error) {
     // Captura cualquier error inesperado y devuelve un error 500
-    return res.status(500).json({ message: "ERROR: Se produjo un error interno del servidor" });
+    return res.status(500).json({ success: false, message: "ERROR: Se produjo un error interno del servidor" });
   }
 };
 

@@ -22,7 +22,7 @@ const deleteContribution = async (req, res) => {
 
     // Validar el ID
     if (!Number.isInteger(id) || id <= 0) {
-      return res.status(400).json({ message: "ERROR: ID inválido" });
+      return res.status(400).json({ success: false, message: "ERROR: ID inválido" });
     }
 
     // Buscar la publicación con sus imágenes
@@ -31,7 +31,7 @@ const deleteContribution = async (req, res) => {
     });
 
     if (!contribution) {
-      return res.status(404).json({ message: "ERROR: Publicación no encontrada" });
+      return res.status(404).json({ success: false, message: "ERROR: Publicación no encontrada" });
     }
 
     // Eliminar la publicación de la BD
@@ -39,10 +39,9 @@ const deleteContribution = async (req, res) => {
       where: { id: id },
     });
 
-    res.json({ message: "SUCCESS: Publicación eliminada exitosamente" });
+    res.status(200).json({ success: true, message: "SUCCESS: Publicación eliminada exitosamente" });
   } catch (error) {
-    console.error("(deleteContribution) -> ERROR: Error eliminando la publicación:", error);
-    res.status(500).json({ message: "ERROR: Error eliminando la publicación" });
+    res.status(500).json({ success: false, message: "ERROR: Error eliminando la publicación" });
   }
 };
 

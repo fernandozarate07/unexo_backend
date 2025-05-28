@@ -78,7 +78,7 @@ const downloadContribution = async (req, res) => {
   } catch (error) {
     return res.status(error.status || 500).json({
       success: false,
-      message: error.message || "ERROR: Error interno del servidor.",
+      message: "ERROR: Error interno del servidor.",
     });
   }
 };

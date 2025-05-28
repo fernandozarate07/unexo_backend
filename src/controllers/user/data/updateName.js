@@ -18,12 +18,13 @@ const updateName = async (req, res) => {
     });
 
     return res.status(200).json({
-      message: "Nombre actualizado correctamente",
+      success: true,
+      message: "SUCCESS: Nombre actualizado correctamente",
       user: updatedUser,
     });
   } catch (error) {
-    console.error("Error al actualizar el nombre:", error);
     return res.status(500).json({
+      success: false,
       message: "ERROR: Error al actualizar el nombre",
     });
   }

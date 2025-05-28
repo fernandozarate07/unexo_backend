@@ -32,14 +32,14 @@ const recoverSavedStateContribution = async (req, res) => {
       // Si ya está guardado, responder con el estado true
       return res.status(200).json({
         success: true,
-        message: "El aporte ya está guardado.",
+        message: "SUCCESS: El aporte ya está guardado.",
         isSaved: true,
       });
     } else {
       // Si no está guardado, responder con el estado false
       return res.status(200).json({
         success: true,
-        message: "El aporte no está guardado.",
+        message: "SUCCESS: El aporte no está guardado.",
         isSaved: false,
       });
     }
@@ -47,7 +47,7 @@ const recoverSavedStateContribution = async (req, res) => {
     // Si ocurre un error durante la operación, responder con código de estado 500 (INTERNAL SERVER ERROR)
     return res.status(500).json({
       success: false,
-      message: "Se produjo un error interno del servidor",
+      message: "ERROR: Se produjo un error interno del servidor",
       isSaved: false,
     });
   }

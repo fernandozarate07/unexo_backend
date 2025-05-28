@@ -35,13 +35,12 @@ const createContribution = async (req, res) => {
 
     // Si la creación es exitosa, respondemos con el nuevo aporte creado
     return res.status(201).json({
-      message: "Aporte creado con éxito", // Mensaje de éxito
+      message: "SUCCESS: Aporte creado con éxito", // Mensaje de éxito
       aporte: newContribution, // El aporte recién creado
     });
   } catch (error) {
     // En caso de error, lo capturamos y respondemos con un error 500
-    console.error("(createContribution) -> ", error);
-    return res.status(500).json({ message: "ERROR: Error al crear el aporte", error });
+    return res.status(500).json({ message: "ERROR: Error al crear el aporte" });
   }
 };
 

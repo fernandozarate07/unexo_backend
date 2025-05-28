@@ -39,10 +39,9 @@ const recoverData = async (req, res) => {
     });
   } catch (error) {
     // Si ocurre un error al recuperar los datos, lo capturamos y enviamos un mensaje de error
-    console.error("(recoverData) Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Error al recuperar datos para los filtros.",
+      message: "ERROR: Error al recuperar datos para los filtros.",
     });
   }
 };

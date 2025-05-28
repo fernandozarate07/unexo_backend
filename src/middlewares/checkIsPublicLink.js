@@ -16,7 +16,7 @@ async function checkIsPublicLink(req, res) {
 
   // Verificar si se proporcionó el enlace
   if (!linkDrive) {
-    return res.status(400).json({ message: "Falta el enlace en la solicitud." });
+    return res.status(400).json({ success: false, message: "ERROR: Falta el enlace en la solicitud." });
   }
 
   // Extraer el ID del enlace de Google Drive utilizando expresiones regulares
@@ -25,7 +25,7 @@ async function checkIsPublicLink(req, res) {
 
   // Verificar si el ID es válido
   if (!fileId) {
-    return res.status(400).json({ message: "Enlace de Google Drive inválido." });
+    return res.status(400).json({ success: false, message: "ERROR: Enlace de Google Drive inválido." });
   }
 
   // Crear la URL de previsualización del archivo en Google Drive
@@ -43,15 +43,13 @@ async function checkIsPublicLink(req, res) {
 
     // Si el enlace no es público, devolver un error 403
     if (!isPublic) {
-      return res.status(403).json({ message: "El enlace de Google Drive no es público." });
+      return res.status(403).json({ success: false, message: "ERROR: El enlace de Google Drive no es público." });
     }
 
     // Si el enlace es público, devolver una respuesta exitosa
-    return res.status(200).json({ message: "El enlace de Google Drive es público." });
+    return res.status(200).json({ success: true, message: "SUCCESS: El enlace de Google Drive es público." });
   } catch (error) {
-    // Manejo de errores en caso de que ocurra una excepción
-    console.error("Error en checkIsPublicLink:", error);
-    return res.status(500).json({ message: "Error al verificar el enlace de Google Drive." });
+    return res.status(500).json({ success: false, message: "ERROR: Se produjo un error interno del servidor" });
   }
 }
 

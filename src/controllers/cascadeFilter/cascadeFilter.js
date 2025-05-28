@@ -60,10 +60,9 @@ const filterContent = async (req, res) => {
     });
   } catch (error) {
     // Si ocurre un error durante la consulta, lo capturamos y respondemos con un mensaje de error
-    console.error("(filterContent) -> Error al filtrar contenido:", error);
     return res.status(500).json({
       success: false,
-      message: "Error al filtrar contenido.",
+      message: "ERROR: Error al filtrar contenido.",
     });
   }
 };

@@ -20,7 +20,7 @@ async function checkExistingLink(req, res, next) {
 
   // Verifica si el enlace fue proporcionado en la solicitud
   if (!linkDrive) {
-    return res.status(400).json({ message: "Falta el link en la solicitud." });
+    return res.status(400).json({ success: false, message: "ERROR: Falta el link en la solicitud." });
   }
 
   try {
@@ -34,14 +34,12 @@ async function checkExistingLink(req, res, next) {
 
     // Si el enlace ya existe en la base de datos, responde con un error 400.
     if (existingContribution) {
-      return res.status(400).json({ message: "El enlace ya ha sido utilizado en otro aporte." });
+      return res.status(400).json({ success: false, message: "ERROR: El enlace ya ha sido utilizado en otro aporte." });
     }
 
     next(); // Si el enlace no existe, pasa al siguiente middleware.
   } catch (error) {
-    // En caso de error al consultar la base de datos, se captura y responde con un error 500.
-    console.error("(checkExistingLink) -> ERROR:", error);
-    return res.status(500).json({ message: "Error al verificar el enlace en la base de datos." });
+    return res.status(500).json({ success: false, message: "ERROR: Se produjo un error interno del servidor" });
   }
 }
 

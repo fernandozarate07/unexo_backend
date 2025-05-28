@@ -27,7 +27,8 @@ const updateContribution = async (req, res) => {
 
     if (!existingContribution) {
       return res.status(404).json({
-        message: "Aporte no encontrado o no tienes permisos para editarlo",
+        success: false,
+        message: "ERROR: Aporte no encontrado o no tienes permisos para editarlo",
       });
     }
 
@@ -43,14 +44,14 @@ const updateContribution = async (req, res) => {
     });
 
     return res.status(200).json({
-      message: "Aporte actualizado con éxito",
+      success: true,
+      message: "SUCCESS: Aporte actualizado con éxito",
       aporte: updatedContribution,
     });
   } catch (error) {
-    console.error("(updateContribution) -> ", error);
     return res.status(500).json({
+      success: false,
       message: "ERROR: Error al actualizar el aporte",
-      error: error.message,
     });
   }
 };

@@ -35,10 +35,9 @@ const resetDynamicData = async (req, res) => {
     await prisma.$executeRawUnsafe(`SET FOREIGN_KEY_CHECKS=1`);
 
     // Enviar respuesta exitosa
-    res.status(200).json({ message: "Datos dinámicos reiniciados correctamente" });
+    res.status(200).json({ success: true, message: "SUCCESS: Datos dinámicos reiniciados correctamente" });
   } catch (error) {
-    console.error("(reset_data.js) -> ERROR al resetear datos dinámicos", error);
-    res.status(500).json({ message: "No se pudo resetear los datos dinámicos" });
+    return res.status(500).json({ success: false, message: "ERROR: Se produjo un error interno del servidor" });
   }
 };
 
@@ -82,10 +81,9 @@ const resetStaticData = async (req, res) => {
     await prisma.$executeRawUnsafe(`SET FOREIGN_KEY_CHECKS=1`);
 
     // Enviar respuesta exitosa
-    res.status(200).json({ message: "Datos estáticos reiniciados correctamente" });
+    res.status(200).json({ success: true, message: "SUCCESS: Datos estáticos reiniciados correctamente" });
   } catch (error) {
-    console.error("(reset_data.js) -> ERROR al resetear datos estáticos", error);
-    res.status(500).json({ message: "No se pudo resetear los datos estáticos" });
+    return res.status(500).json({ success: false, message: "ERROR: Se produjo un error interno del servidor" });
   }
 };
 

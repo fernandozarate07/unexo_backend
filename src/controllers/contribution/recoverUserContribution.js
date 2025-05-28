@@ -37,11 +37,9 @@ const recoverUserContributions = async (req, res) => {
       contributions: contributions,
     });
   } catch (error) {
-    console.error("(recoverUserContributions) -> ", error);
     return res.status(500).json({
       success: false,
-      message: "Error al recuperar las contribuciones del usuario",
-      error: error.message,
+      message: "ERROR: Error al recuperar las contribuciones del usuario",
     });
   }
 };
