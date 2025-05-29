@@ -12,6 +12,7 @@ const handleProfilePhoto = require("../controllers/user/uploadProfilePhoto/handl
 const checkSessionFlow = require("../middlewares/checkSessionFlow");
 const validateImageRequest = require("../middlewares/validateImageRequest");
 const validateDataRequest = require("../middlewares/validateDataRequest");
+const checkIsUser = require("../middlewares/checkIsUser");
 
 // validadores
 const imageValidator = require("../validators/imageValidator");
@@ -23,11 +24,12 @@ const updateNameValidator = require("../validators/updateNameValidator");
 router.put(
   "/profile-picture",
   checkSessionFlow,
+  checkIsUser,
   cloudinaryImageUploader,
   imageValidator,
   validateImageRequest,
   handleProfilePhoto
 );
 // Actualizar nombre
-router.put("/name", checkSessionFlow, updateNameValidator, validateDataRequest, updateName);
+router.put("/name", checkSessionFlow, checkIsUser, updateNameValidator, validateDataRequest, updateName);
 module.exports = router;

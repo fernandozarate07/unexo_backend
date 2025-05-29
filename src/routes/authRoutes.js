@@ -15,13 +15,14 @@ const updatePasswordValidator = require("../validators/updatePasswordValidator")
 // Middleware require
 const validateDataRequest = require("../middlewares/validateDataRequest");
 const checkSessionFlow = require("../middlewares/checkSessionFlow");
+const checkIsUser = require("../middlewares/checkIsUser");
 
 // Rutas de autenticación
 router.post("/register", authValidator, validateDataRequest, registerUser);
-router.post("/login", loginUser);
-router.post("/logout", checkSessionFlow, logoutUser);
-router.get("/session", sessionStatus);
-router.put("/password", checkSessionFlow, updatePasswordValidator, validateDataRequest, updatePassword);
+router.post("/login", loginUser); // agregar validator para evitar ataques de fuerza bruta ni inyecciones SQL
+router.post("/logout", checkSessionFlow, checkIsUser, logoutUser);
+router.get("/session", checkSessionFlow, checkIsUser, sessionStatus);
+router.put("/password", checkSessionFlow, checkIsUser, updatePasswordValidator, validateDataRequest, updatePassword);
 
 // router.post("/reset-forgot-password", resetForgotPassword);
 

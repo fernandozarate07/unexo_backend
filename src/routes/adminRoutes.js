@@ -15,14 +15,15 @@ const { resetDynamicData, resetStaticData } = require("../controllers/admin/data
 // Middlewares
 
 // const validateDataRequest = require("../middlewares/validateDataRequest");
-// const checkIsAdmin = require("../middlewares/checkIsAdmin");
+const checkIsSuperAdmin = require("../middlewares/checkIsSuperAdmin");
+const checkSessionFlow = require("../middlewares/checkSessionFlow");
 
 //--------------------------------------------------
 // Routes
 
 // Data reset routes
-router.post("/reset/dynamic", resetDynamicData);
-router.post("/reset/static", resetStaticData);
+router.post("/reset/dynamic", checkSessionFlow, checkIsSuperAdmin, resetDynamicData);
+router.post("/reset/static", checkSessionFlow, checkIsSuperAdmin, resetStaticData);
 
 // Role management
 // router.post("/updateRole", checkIsAdmin, updateRoleValidator, validateDataRequest, updateRole);

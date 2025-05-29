@@ -6,6 +6,7 @@ const router = express.Router();
 const checkIsPublicLink = require("../middlewares/checkIsPublicLink"); // Verifica si el enlace es público
 const checkExistingLink = require("../middlewares/checkExistingLink"); // Verifica si el enlace ya fue utilizado
 const checkSessionFlow = require("../middlewares/checkSessionFlow"); // Verifica que exista una sesión activa
+const checkIsUser = require("../middlewares/checkIsUser");
 
 // Controlador para manejar la creación de aportes
 const createContribution = require("../controllers/contribution/createContribution"); // Controlador para crear un aporte
@@ -18,6 +19,7 @@ const createContributionValidator = require("../validators/createContributionVal
 const updateContributionValidator = require("../validators/updateContributionValidator"); // Esquema de validación para actualización
 const deleteContributionValidator = require("../validators/deleteContributionValidator"); // Esquema de validación para eliminación
 const validateDataRequest = require("../middlewares/validateDataRequest"); // Middleware que maneja errores de validación
+const { check } = require("express-validator");
 
 // Ruta para verificar si un link es público (utilizada de forma independiente)
 router.post("/verify-link", checkIsPublicLink);
@@ -31,6 +33,7 @@ router.post("/verify-link", checkIsPublicLink);
 router.post(
   "/",
   checkSessionFlow,
+  checkIsUser,
   createContributionValidator,
   validateDataRequest,
   checkExistingLink,
@@ -45,6 +48,7 @@ router.post(
 router.put(
   "/:id",
   checkSessionFlow,
+  checkIsUser,
   updateContributionValidator,
   validateDataRequest,
   checkExistingLink,
@@ -56,14 +60,21 @@ router.put(
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. Valida datos  -> 3. Maneja errores de validación
 // 4. Borra la contribucion y todas las relaciones asociadas de otras tablas a esa contribución
-router.delete("/:id", checkSessionFlow, deleteContributionValidator, validateDataRequest, deleteContribution);
+router.delete(
+  "/:id",
+  checkSessionFlow,
+  checkIsUser,
+  deleteContributionValidator,
+  validateDataRequest,
+  deleteContribution
+);
 
 //-------------------------------------------------
 
 // Ruta para recuperar los aportes de un usuario
 // Secuencia de middlewares:
 // 1. Verifica sesión -> 2. recupera los aportes del usuario
-router.get("/my", checkSessionFlow, recoverUserContributions);
+router.get("/my", checkSessionFlow, checkIsUser, recoverUserContributions);
 
 //-------------------------------------------------
 
